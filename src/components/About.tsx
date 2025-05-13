@@ -1,7 +1,7 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Mountains, Tree, Clock } from "lucide-react";
+import { Mountain, Trees, Clock } from "lucide-react";
 
 const About = () => {
   const certifications = [
@@ -67,11 +67,11 @@ const About = () => {
               <h3 className="text-xl font-semibold mb-4">When I'm not coding...</h3>
               <div className="flex flex-wrap gap-4">
                 <Card className="flex items-center p-4 w-full sm:w-auto">
-                  <Mountains className="h-5 w-5 text-brand-blue dark:text-brand-lightBlue mr-2" />
+                  <Mountain className="h-5 w-5 text-brand-blue dark:text-brand-lightBlue mr-2" />
                   <span>Hiking</span>
                 </Card>
                 <Card className="flex items-center p-4 w-full sm:w-auto">
-                  <Tree className="h-5 w-5 text-brand-blue dark:text-brand-lightBlue mr-2" />
+                  <Trees className="h-5 w-5 text-brand-blue dark:text-brand-lightBlue mr-2" />
                   <span>Nature</span>
                 </Card>
                 <Card className="flex items-center p-4 w-full sm:w-auto">
