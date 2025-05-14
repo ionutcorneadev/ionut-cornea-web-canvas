@@ -1,8 +1,16 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { Switch } from "@/components/ui/switch";
 
 const Hero = () => {
+  const [isToggled, setIsToggled] = useState(false);
+  
+  const handleToggle = () => {
+    setIsToggled(!isToggled);
+  };
+
   return (
     <section id="hero" className="pt-28 md:pt-32 pb-16 md:pb-24">
       <div className="container px-4 sm:px-6 lg:px-8 mx-auto">
@@ -39,19 +47,28 @@ const Hero = () => {
           </div>
           
           <div className="lg:w-1/3 relative animate-fade-in animate-delay-300">
-            <div className="relative z-10 bg-white dark:bg-gray-800 p-2 rounded-full border-4 border-brand-blue dark:border-brand-lightBlue shadow-xl">
-              <img
-                src="/lovable-uploads/f06cafc4-2749-4ed4-a74a-abd98575437c.png"
-                alt="Ionuț Cornea"
-                className="w-64 h-64 sm:w-80 sm:h-80 rounded-full object-cover"
-              />
-            </div>
-            <div className="absolute -bottom-4 -right-4 flex items-center justify-center bg-brand-blue text-white dark:bg-accent rounded-full p-4 shadow-lg">
-              <img 
-                src="/lovable-uploads/c84c1cdc-f256-4d0a-930e-85ffbb27a0a8.png" 
-                alt="Personal Logo" 
-                className="h-12 w-12"
-              />
+            <div className="flex flex-col items-center">
+              <div className="mb-4 flex items-center gap-2">
+                <span className="text-sm font-medium">Toggle Picture Style</span>
+                <Switch 
+                  checked={isToggled} 
+                  onCheckedChange={handleToggle}
+                  className="data-[state=checked]:bg-green-500"
+                />
+              </div>
+              
+              <div className={`relative z-10 p-2 rounded-full 
+                ${isToggled 
+                  ? 'transform translate-x-4 border-4 border-green-500' 
+                  : 'border-4 border-brand-blue dark:border-brand-lightBlue'} 
+                transition-all duration-300 ease-in-out`}
+              >
+                <img
+                  src="/lovable-uploads/f06cafc4-2749-4ed4-a74a-abd98575437c.png"
+                  alt="Ionuț Cornea"
+                  className="w-64 h-64 sm:w-80 sm:h-80 rounded-full object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>
