@@ -4,8 +4,11 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Testimonials = () => {
+  const { t } = useLanguage();
+  
   const testimonials = [
     {
       name: "Alex Smith",
@@ -36,11 +39,11 @@ const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextTestimonial = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % (testimonials.length - 1));
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
   };
 
   const prevTestimonial = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + (testimonials.length - 1)) % (testimonials.length - 1));
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
   };
 
   const renderTestimonialCard = (testimonial, index) => (
@@ -66,39 +69,50 @@ const Testimonials = () => {
     </Card>
   );
 
+  // For mobile: show one testimonial per slide
+  // For desktop: show two testimonials per slide
+  const getVisibleTestimonials = () => {
+    return [
+      testimonials[currentIndex],
+      testimonials[(currentIndex + 1) % testimonials.length]
+    ];
+  };
+
   return (
     <section id="testimonials" className="py-16 md:py-24">
       <div className="container px-4 sm:px-6 lg:px-8 mx-auto">
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <Badge variant="outline" className="mb-4">Testimonials</Badge>
+          <Badge variant="outline" className="mb-4">{t('testimonials.badge')}</Badge>
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            What Clients Say
+            {t('testimonials.title')}
           </h2>
           <p className="text-lg text-muted-foreground">
-            Don't just take my word for it - hear from some of my happy clients
+            {t('testimonials.subtitle')}
           </p>
         </div>
 
         <div className="max-w-6xl mx-auto">
           <div className="relative">
             <div className="overflow-hidden">
-              <div 
-                className="flex transition-transform duration-500 ease-in-out" 
-                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-              >
-                {Array.from({ length: testimonials.length - 1 }, (_, slideIndex) => (
-                  <div key={slideIndex} className="w-full flex-shrink-0">
-                    <div className="flex gap-6">
-                      {renderTestimonialCard(testimonials[slideIndex], slideIndex)}
-                      {renderTestimonialCard(testimonials[slideIndex + 1], slideIndex + 1)}
-                    </div>
-                  </div>
-                ))}
+              {/* Mobile view: Single testimonial */}
+              <div className="block md:hidden">
+                <div className="flex transition-transform duration-500 ease-in-out">
+                  {renderTestimonialCard(testimonials[currentIndex], currentIndex)}
+                </div>
+              </div>
+              
+              {/* Desktop view: Two testimonials side by side */}
+              <div className="hidden md:block">
+                <div className="flex gap-6">
+                  {getVisibleTestimonials().map((testimonial, index) => 
+                    renderTestimonialCard(testimonial, currentIndex + index)
+                  )}
+                </div>
               </div>
             </div>
             
             <div className="flex justify-center mt-6 gap-2">
-              {Array.from({ length: testimonials.length - 1 }, (_, index) => (
+              {testimonials.map((_, index) => (
                 <Button 
                   key={index} 
                   variant={index === currentIndex ? "default" : "outline"}

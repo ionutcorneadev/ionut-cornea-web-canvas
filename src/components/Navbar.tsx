@@ -1,12 +1,14 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,11 +26,11 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: "Services", href: "#services" },
-    { name: "Projects", href: "#projects" },
-    { name: "About", href: "#about" },
-    { name: "Testimonials", href: "#testimonials" },
-    { name: "Contact", href: "#contact" },
+    { name: t('navbar.services'), href: "#services" },
+    { name: t('navbar.projects'), href: "#projects" },
+    { name: t('navbar.about'), href: "#about" },
+    { name: t('navbar.testimonials'), href: "#testimonials" },
+    { name: t('navbar.contact'), href: "#contact" },
   ];
 
   return (
@@ -63,15 +65,17 @@ const Navbar = () => {
             </a>
           ))}
           <div className="ml-4 flex items-center gap-2">
+            <LanguageSwitcher />
             <ThemeToggle />
             <Button variant="default" asChild>
-              <a href="#contact">Contact Me</a>
+              <a href="#contact">{t('navbar.contactMe')}</a>
             </Button>
           </div>
         </div>
 
         {/* Mobile Navigation Toggle */}
         <div className="flex md:hidden items-center gap-4">
+          <LanguageSwitcher />
           <ThemeToggle />
           <Button variant="ghost" size="icon" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -96,7 +100,7 @@ const Navbar = () => {
             <div className="py-4">
               <Button variant="default" className="w-full" asChild>
                 <a href="#contact" onClick={() => setIsMenuOpen(false)}>
-                  Contact Me
+                  {t('navbar.contactMe')}
                 </a>
               </Button>
             </div>

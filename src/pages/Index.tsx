@@ -7,19 +7,22 @@ import About from "@/components/About";
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
-      <Navbar />
-      <Hero />
-      <Services />
-      <Projects />
-      <About />
-      <Testimonials />
-      <Contact />
-      <Footer />
-    </div>
+    <LanguageProvider>
+      <div className="min-h-screen">
+        <Navbar />
+        <Hero />
+        <Services />
+        <Projects />
+        <About />
+        <Testimonials />
+        <Contact />
+        <Footer />
+      </div>
+    </LanguageProvider>
   );
 };
 

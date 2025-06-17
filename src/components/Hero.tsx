@@ -3,9 +3,11 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Switch } from "@/components/ui/switch";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Hero = () => {
   const [isToggled, setIsToggled] = useState(false);
+  const { t } = useLanguage();
   
   const handleToggle = () => {
     setIsToggled(!isToggled);
@@ -30,27 +32,27 @@ const Hero = () => {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
           <div className="max-w-2xl text-center lg:text-left animate-fade-in">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
-              I build web solutions for your business and help increase its visibility online.
+              {t('hero.title')}
             </h1>
             
             <h2 className="text-xl md:text-2xl font-medium text-muted-foreground mb-8">
-              Ionuț Cornea – Full-Stack PHP & Vue Developer
+              {t('hero.subtitle')}
             </h2>
             
             <div className="flex flex-wrap justify-center lg:justify-start gap-4">
               <Button asChild size="lg" className="font-medium">
-                <a href="#projects">View Portfolio</a>
+                <a href="#projects">{t('hero.viewPortfolio')}</a>
               </Button>
               
               <Button asChild variant="outline" size="lg" className="font-medium">
                 <a href="#contact">
-                  Book a Call
+                  {t('hero.bookCall')}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
               </Button>
               
               <Button asChild variant="secondary" size="lg" className="font-medium">
-                <a href="#contact">Contact Me</a>
+                <a href="#contact">{t('hero.contactMe')}</a>
               </Button>
             </div>
           </div>
@@ -58,7 +60,7 @@ const Hero = () => {
           <div className="lg:w-1/3 relative animate-fade-in animate-delay-300">
             <div className="flex flex-col items-center">
               <div className="mb-4 flex items-center gap-2">
-                <span className="text-sm font-medium">Hire Ionut now</span>
+                <span className="text-sm font-medium">{t('hero.hireNow')}</span>
                 <Switch 
                   checked={isToggled} 
                   onCheckedChange={handleToggle}
