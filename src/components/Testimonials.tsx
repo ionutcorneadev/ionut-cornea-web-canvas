@@ -36,12 +36,35 @@ const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextTestimonial = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % (testimonials.length - 1));
   };
 
   const prevTestimonial = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + (testimonials.length - 1)) % (testimonials.length - 1));
   };
+
+  const renderTestimonialCard = (testimonial, index) => (
+    <Card key={index} className="border-2 overflow-hidden flex-1">
+      <CardContent className="pt-6 pb-8 px-6">
+        <div className="flex flex-col items-center text-center">
+          <div className="flex-shrink-0 mb-4">
+            <img 
+              src={testimonial.image} 
+              alt={testimonial.name}
+              className="w-16 h-16 rounded-full border-4 border-brand-blue dark:border-brand-lightBlue"
+            />
+          </div>
+          <div className="mb-4">
+            <div className="text-lg font-semibold">{testimonial.name}</div>
+            <div className="text-muted-foreground text-sm">{testimonial.role}</div>
+          </div>
+          <div className="text-base italic">
+            "{testimonial.content}"
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
 
   return (
     <section id="testimonials" className="py-16 md:py-24">
@@ -56,44 +79,26 @@ const Testimonials = () => {
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="relative">
             <div className="overflow-hidden">
               <div 
                 className="flex transition-transform duration-500 ease-in-out" 
                 style={{ transform: `translateX(-${currentIndex * 100}%)` }}
               >
-                {testimonials.map((testimonial, index) => (
-                  <div key={index} className="w-full flex-shrink-0">
-                    <Card className="border-2 overflow-hidden">
-                      <CardContent className="pt-6 pb-8 px-6 md:px-10">
-                        <div className="flex flex-col md:flex-row md:items-start gap-6">
-                          <div className="flex-shrink-0 mx-auto md:mx-0">
-                            <img 
-                              src={testimonial.image} 
-                              alt={testimonial.name}
-                              className="w-20 h-20 rounded-full border-4 border-brand-blue dark:border-brand-lightBlue"
-                            />
-                          </div>
-                          <div>
-                            <div className="mb-4 text-center md:text-left">
-                              <div className="text-xl font-semibold">{testimonial.name}</div>
-                              <div className="text-muted-foreground">{testimonial.role}</div>
-                            </div>
-                            <div className="text-lg italic">
-                              "{testimonial.content}"
-                            </div>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
+                {Array.from({ length: testimonials.length - 1 }, (_, slideIndex) => (
+                  <div key={slideIndex} className="w-full flex-shrink-0">
+                    <div className="flex gap-6">
+                      {renderTestimonialCard(testimonials[slideIndex], slideIndex)}
+                      {renderTestimonialCard(testimonials[slideIndex + 1], slideIndex + 1)}
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
             
             <div className="flex justify-center mt-6 gap-2">
-              {testimonials.map((_, index) => (
+              {Array.from({ length: testimonials.length - 1 }, (_, index) => (
                 <Button 
                   key={index} 
                   variant={index === currentIndex ? "default" : "outline"}

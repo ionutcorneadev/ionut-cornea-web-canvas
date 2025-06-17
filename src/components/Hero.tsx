@@ -30,7 +30,7 @@ const Hero = () => {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
           <div className="max-w-2xl text-center lg:text-left animate-fade-in">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
-              I build innovative, <span className="text-brand-blue dark:text-brand-lightBlue">secured</span> web solutions to boost your business, with effective SEO for better online presence.
+              I build web solutions for your business and help increase its visibility online.
             </h1>
             
             <h2 className="text-xl md:text-2xl font-medium text-muted-foreground mb-8">

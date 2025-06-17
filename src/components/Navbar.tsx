@@ -47,7 +47,7 @@ const Navbar = () => {
               alt="Ionuț Cornea" 
               className="h-8 w-auto"
             />
-            <span className="text-lg font-semibold hidden sm:block">Ionuț Cornea</span>
+            <span className="text-lg font-semibold">IONUT CORNEA</span>
           </a>
         </div>
 
