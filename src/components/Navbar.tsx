@@ -65,18 +65,18 @@ const Navbar = () => {
             </a>
           ))}
           <div className="ml-4 flex items-center gap-2">
-            <LanguageSwitcher />
             <ThemeToggle />
             <Button variant="default" asChild>
               <a href="#contact">{t('navbar.contactMe')}</a>
             </Button>
+            <LanguageSwitcher />
           </div>
         </div>
 
         {/* Mobile Navigation Toggle */}
         <div className="flex md:hidden items-center gap-4">
-          <LanguageSwitcher />
           <ThemeToggle />
+          <LanguageSwitcher />
           <Button variant="ghost" size="icon" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </Button>

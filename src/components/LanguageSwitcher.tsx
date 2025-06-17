@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Flag } from "lucide-react";
 
 const LanguageSwitcher = () => {
   const { language, setLanguage } = useLanguage();
@@ -16,17 +17,10 @@ const LanguageSwitcher = () => {
       onClick={toggleLanguage}
       className="flex items-center gap-2 px-3 py-2"
     >
-      {language === 'en' ? (
-        <>
-          <span className="text-2xl">🇬🇧</span>
-          <span className="text-sm font-medium">EN</span>
-        </>
-      ) : (
-        <>
-          <span className="text-2xl">🇷🇴</span>
-          <span className="text-sm font-medium">RO</span>
-        </>
-      )}
+      <Flag className="h-4 w-4" />
+      <span className="text-sm font-medium">
+        {language === 'en' ? 'English' : 'Română'}
+      </span>
     </Button>
   );
 };
