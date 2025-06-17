@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Switch } from "@/components/ui/switch";
 
 const Hero = () => {
@@ -11,22 +11,31 @@ const Hero = () => {
     setIsToggled(!isToggled);
   };
 
+  useEffect(() => {
+    if (isToggled) {
+      const timer = setTimeout(() => {
+        const contactSection = document.getElementById('contact');
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 1000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [isToggled]);
+
   return (
     <section id="hero" className="pt-28 md:pt-32 pb-16 md:pb-24">
       <div className="container px-4 sm:px-6 lg:px-8 mx-auto">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
           <div className="max-w-2xl text-center lg:text-left animate-fade-in">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
-              I build fast, secure & <span className="text-brand-blue dark:text-brand-lightBlue">scalable</span> web apps – <br className="hidden md:block"/> with PHP & Vue.js.
+              I build innovative, <span className="text-brand-blue dark:text-brand-lightBlue">secured</span> web solutions to boost your business, with effective SEO for better online presence.
             </h1>
             
-            <h2 className="text-xl md:text-2xl font-medium text-muted-foreground mb-4">
+            <h2 className="text-xl md:text-2xl font-medium text-muted-foreground mb-8">
               Ionuț Cornea – Full-Stack PHP & Vue Developer
             </h2>
-            
-            <p className="text-lg mb-8">
-              I help startups and businesses launch modern web solutions that solve real problems.
-            </p>
             
             <div className="flex flex-wrap justify-center lg:justify-start gap-4">
               <Button asChild size="lg" className="font-medium">
@@ -49,7 +58,7 @@ const Hero = () => {
           <div className="lg:w-1/3 relative animate-fade-in animate-delay-300">
             <div className="flex flex-col items-center">
               <div className="mb-4 flex items-center gap-2">
-                <span className="text-sm font-medium">Toggle Picture Style</span>
+                <span className="text-sm font-medium">Hire Ionut now</span>
                 <Switch 
                   checked={isToggled} 
                   onCheckedChange={handleToggle}
