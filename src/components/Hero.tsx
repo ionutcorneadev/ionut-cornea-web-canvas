@@ -31,11 +31,11 @@ const Hero = () => {
       <div className="container px-4 sm:px-6 lg:px-8 mx-auto">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
           <div className="max-w-2xl text-center lg:text-left animate-fade-in">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight leading-relaxed">
               {t('hero.title')}
             </h1>
             
-            <h2 className="text-xl md:text-2xl font-medium text-muted-foreground mb-8">
+            <h2 className="text-xl md:text-2xl font-medium text-muted-foreground mb-8 leading-relaxed">
               {t('hero.subtitle')}
             </h2>
             
